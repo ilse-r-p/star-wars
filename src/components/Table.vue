@@ -10,57 +10,29 @@
   <table class="m-auto border border-gray-900">
     <thead>
       <tr class="bg-gray-800 text-white text-left">
-        <th
-          class="px-6 py-2 cursor-pointer"
-          :class="sortedClass('name')"
-          @click="sortBy('name')"
-        >
-          Name
-        </th>
-        <th 
-          class="px-6 py-2 cursor-pointer"
-          :class="sortedClass('height')"
-          @click="sortBy('height')"
-        >
+        <th class="px-6 py-2 cursor-pointer" @click="sortBy('name')">Name</th>
+        <th class="px-6 py-2 cursor-pointer" @click="sortBy('height')">
           Height
         </th>
-        <th 
-          class="px-6 py-2 cursor-pointer"
-          :class="sortedClass('mass')"
-          @click="sortBy('mass')"
-        >
-          Mass
-        </th>
-        <th 
-          class="px-6 py-2 cursor-pointer"
-          :class="sortedClass('created')"
-          @click="sortBy('created')"
-        >
+        <th class="px-6 py-2 cursor-pointer" @click="sortBy('mass')">Mass</th>
+        <th class="px-6 py-2 cursor-pointer" @click="sortBy('created')">
           Created
         </th>
-        <th
-          class="px-6 py-2 cursor-pointer"
-          :class="sortedClass('edited')"
-          @click="sortBy('edited')"
-        >
+        <th class="px-6 py-2 cursor-pointer" @click="sortBy('edited')">
           Edited
         </th>
-        <th
-          class="px-6 py-2 cursor-pointer"
-          :class="sortedClass('homeworld')"
-          @click="sortBy('homeworld')"
-        >
+        <th class="px-6 py-2 cursor-pointer" @click="sortBy('homeworld')">
           Planet Name
         </th>
       </tr>
     </thead>
     <tbody>
-      <tr v-for="character in sortedItems" v-bind:key="character.name">
+      <tr v-for="(character, index) in sortedCharacters" v-bind:key="character.name">
         <td v-html="highlightMatches(character.name)" class="px-6 py-2"></td>
         <td class="px-6 py-2">{{ character.height }} cms</td>
         <td class="px-6 py-2">{{ character.mass }}</td>
-        <td class="px-6 py-2">{{ character.created }}</td>
-        <td class="px-6 py-2">{{ character.edited }}</td>
+        <td class="px-6 py-2">{{ dateTime(character.created) }}</td>
+        <td class="px-6 py-2">{{ dateTime(character.edited) }}</td>
         <td class="px-6 py-2">{{ character.homeworld }}</td>
       </tr>
     </tbody>
@@ -68,6 +40,7 @@
 </template>
 
 <script lang="ts">
+import moment from "moment";
 export default {
   data() {
     return {
@@ -88,6 +61,9 @@ export default {
       });
   },
   methods: {
+    dateTime(value) {
+      return moment(value).format("DD-MM-YYYY");
+    },
     highlightMatches(text) {
       const matchExists = text
         .toLowerCase()
@@ -100,11 +76,6 @@ export default {
         (matchedText) =>
           `<strong class="text-yellow-500">${matchedText}</strong>`
       );
-    },
-    sortedClass(key) {
-      return this.sort.key === key
-        ? `sorted ${this.sort.isAsc ? "asc" : "desc"}`
-        : "";
     },
     sortBy(key) {
       this.sort.isAsc = this.sort.key === key ? !this.sort.isAsc : false;
@@ -119,13 +90,12 @@ export default {
         return person.includes(searchTerm);
       });
     },
-    sortedItems () {
+    sortedCharacters () {
       const list = this.characters.slice();
       if (!!this.sort.key) {
         list.sort((a, b) => {
           a = a[this.sort.key];
           b = b[this.sort.key];
-
           return (a === b ? 0 : a > b ? 1 : -1) * (this.sort.isAsc ? 1 : -1);
         });
       }
