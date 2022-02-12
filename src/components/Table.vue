@@ -4,24 +4,52 @@
       v-model="filter"
       type="search"
       placeholder="Am I your father?"
-      class="border rounded w-1/4 focus:outline-none focus:ring focus:ring-yellow-400 px-2 py-1"
+      class="border rounded w-3/4 md:w-1/4 focus:outline-none focus:ring focus:ring-yellow-400 px-2 py-1"
     />
   </div>
   <table class="m-auto border border-gray-900">
     <thead>
       <tr class="bg-gray-800 text-white text-left">
-        <th class="px-6 py-2 cursor-pointer" @click="sortBy('name')">Name</th>
-        <th class="px-6 py-2 cursor-pointer" @click="sortBy('height')">
+        <th
+          class="px-6 py-2 cursor-pointer"
+          @click="sortBy('name')"
+          scope="col"
+        >
+          Name
+        </th>
+        <th
+          class="px-6 py-2 cursor-pointer"
+          @click="sortBy('height')"
+          scope="col"
+        >
           Height
         </th>
-        <th class="px-6 py-2 cursor-pointer" @click="sortBy('mass')">Mass</th>
-        <th class="px-6 py-2 cursor-pointer" @click="sortBy('created')">
+        <th
+          class="px-6 py-2 cursor-pointer"
+          @click="sortBy('mass')"
+          scope="col"
+        >
+          Mass
+        </th>
+        <th
+          class="px-6 py-2 cursor-pointer"
+          @click="sortBy('created')"
+          scope="col"
+        >
           Created
         </th>
-        <th class="px-6 py-2 cursor-pointer" @click="sortBy('edited')">
+        <th
+          class="px-6 py-2 cursor-pointer"
+          @click="sortBy('edited')"
+          scope="col"
+        >
           Edited
         </th>
-        <th class="px-6 py-2 cursor-pointer" @click="sortBy('homeworld')">
+        <th
+          class="px-6 py-2 cursor-pointer"
+          @click="sortBy('homeworld')"
+          scope="col"
+        >
           Planet Name
         </th>
       </tr>
@@ -33,18 +61,18 @@
         <td class="px-6 py-2">{{ character.mass }}</td>
         <td class="px-6 py-2">{{ dateTime(character.created) }}</td>
         <td class="px-6 py-2">{{ dateTime(character.edited) }}</td>
-        <td class="px-6 py-2">{{ character.homeworld }}</td>
+        <td class="px-6 py-2">{{ characterPlanet[index].name }}</td>
       </tr>
     </tbody>
   </table>
 </template>
-
 <script lang="ts">
 import moment from "moment";
 export default {
   data() {
     return {
       characters: [],
+      characterPlanet: [],
       filter: "",
       sort: {
         key: "",
@@ -56,13 +84,23 @@ export default {
     fetch("https://swapi.dev/api/people/")
       .then((res) => res.json())
       .then((res) => {
-        const results = res.results;
+        const results = res.results.map((character) => {
+          this.getPlanetName(character.homeworld);
+          return {
+            ...character,
+          };
+        });
         this.characters = results;
       });
   },
   methods: {
     dateTime(value) {
       return moment(value).format("DD-MM-YYYY");
+    },
+    getPlanetName(homeworldUrl) {
+      return fetch(homeworldUrl)
+        .then((res) => res.json())
+        .then((res) => this.characterPlanet.push(res));
     },
     highlightMatches(text) {
       const matchExists = text
@@ -91,7 +129,7 @@ export default {
       });
     },
     sortedCharacters () {
-      const list = this.characters.slice();
+      const list = this.filteredCharacters.slice();
       if (!!this.sort.key) {
         list.sort((a, b) => {
           a = a[this.sort.key];
