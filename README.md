@@ -1,6 +1,6 @@
-# SWAPI-Ilse-R
+# SWAPI-Ilse-R - A Star Wars project
 
-This template should help get you started developing with Vue 3 in Vite.
+https://tenor.com/es/ver/darth-vader-star-wars-rule-the-galaxy-join-me-gif-17440064
 
 ## Recommended IDE Setup
 
