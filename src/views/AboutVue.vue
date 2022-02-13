@@ -1,6 +1,6 @@
 <template>
   <div class="about">
-    <div class="w-1/3 m-auto my-10">
+    <div class="md:w-1/3 w-2/3 m-auto my-10">
       <h1 class="text-right text-xl">
         "Am I your father? The one, desiiiiireeeee..."
       </h1>
