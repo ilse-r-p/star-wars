@@ -4,7 +4,7 @@
       v-model="filter"
       type="search"
       placeholder="Who rules the galaxy?"
-      class="border-2 border-yellow-300 rounded w-3/4 md:w-1/4 focus:outline-none focus:border-transparent focus:ring focus:ring-yellow-400 px-2 py-1"
+      class="border-2 border-yellow-300 rounded-lg w-3/4 md:w-1/4 focus:outline-none focus:border-transparent focus:ring focus:ring-yellow-400 px-2 py-1"
     />
   </div>
   <div
@@ -15,41 +15,41 @@
       <thead class="lg:border-b-4 lg:border-yellow-300">
         <tr class="text-left">
           <div
-            class="rounded-tl-xl hover:bg-yellow-100 cursor-pointer"
+            class="rounded-tl-xl hover:bg-yellow-100 cursor-pointer bg-yellow-100/50 hover:bg-yellow-200"
             @click="sortBy('name')"
           >
-            <th class="px-6 py-2 w-ful font-normal">Name</th>
+            <th class="px-6 py-2 w-ful">Name</th>
           </div>
           <th
-            class="px-6 py-2 cursor-pointer hover:bg-yellow-100 font-normal"
+            class="px-6 py-2 cursor-pointer hover:bg-yellow-100 bg-yellow-100/50 hover:bg-yellow-200"
             @click="sortBy('height')"
           >
             Height
           </th>
           <th
-            class="px-6 py-2 cursor-pointer hover:bg-yellow-100 font-normal"
+            class="px-6 py-2 cursor-pointer hover:bg-yellow-100 bg-yellow-100/50 hover:bg-yellow-200"
             @click="sortBy('mass')"
           >
             Mass
           </th>
           <th
-            class="px-6 py-2 cursor-pointer hover:bg-yellow-100 font-normal"
+            class="px-6 py-2 cursor-pointer hover:bg-yellow-100 bg-yellow-100/50 hover:bg-yellow-200"
             @click="sortBy('created')"
           >
             Created
           </th>
           <th
-            class="px-6 py-2 cursor-pointer hover:bg-yellow-100 font-normal"
+            class="px-6 py-2 cursor-pointer hover:bg-yellow-100 bg-yellow-100/50 hover:bg-yellow-200"
             @click="sortBy('edited')"
           >
             Edited
           </th>
-          <th
-            class="px-6 py-2 cursor-pointer hover:bg-yellow-100 font-normal"
+          <div
+            class="rounded-tr-xl cursor-pointer bg-yellow-100/50 hover:bg-yellow-200"
             @click="sortBy('homeworld')"
           >
-            Planet Name
-          </th>
+            <th class="px-6 py-2 w-ful">Planet Name</th>
+          </div>
         </tr>
       </thead>
       <tbody>
@@ -129,6 +129,7 @@ export default {
           };
         });
         this.characters = results;
+        console.log(results)
       });
   },
   methods: {

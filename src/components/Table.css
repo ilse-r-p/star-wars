@@ -43,36 +43,42 @@
   
     td:nth-of-type(1):before {
       content: "Name";
+      font-weight: bold;
       position: absolute;
       right: 50%;
       text-align: left;
     }
     td:nth-of-type(2):before {
       content: "Height";
+      font-weight: bold;
       position: absolute;
       right: 50%;
       text-align: left;
     }
     td:nth-of-type(3):before {
       content: "Mass";
+      font-weight: bold;
       position: absolute;
       right: 50%;
       text-align: left;
     }
     td:nth-of-type(4):before {
       content: "Created";
+      font-weight: bold;
       position: absolute;
       right: 50%;
       text-align: left;
     }
     td:nth-of-type(5):before {
       content: "Edited";
+      font-weight: bold;
       position: absolute;
       right: 50%;
       text-align: left;
     }
     td:nth-of-type(6):before {
       content: "Planet Name";
+      font-weight: bold;
       position: absolute;
       right: 50%;
       text-align: left;

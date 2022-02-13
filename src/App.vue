@@ -1,13 +1,17 @@
 <template>
   <div id="nav" class="flex justify-center items-center pt-10">
-    <div class="bg-yellow-100 rounded flex">
-      <router-link to="/" class="text-lg py-1 border-r border-gray-500">
-        <p class="pl-4 pr-3 hover:text-red-800">Table</p>
+    <button
+      class="text-lg py-1 border-r-2 rounded-l-lg bg-yellow-100 border-yellow-300"
+    >
+      <router-link to="/">
+        <p class="pl-4 pr-3 hover:text-red-600">Table</p>
       </router-link>
-      <router-link to="/about" class="text-lg py-1">
-        <p class="pr-4 pl-3 hover:text-red-800">About</p>
+    </button>
+    <button class="text-lg py-1 rounded-r-lg bg-yellow-100">
+      <router-link to="/about">
+        <p class="pr-4 pl-3 hover:text-red-600">About</p>
       </router-link>
-    </div>
+    </button>
   </div>
   <router-view />
 </template>
