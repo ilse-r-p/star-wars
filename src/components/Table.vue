@@ -56,7 +56,7 @@
         <tr
           v-for="(character, index) in sortedCharacters"
           v-bind:key="character.name"
-          class="border border-yellow-200 rounded-xl lg:border-none bg-white/90 lg:bg-transparent"
+          class="border-4 border-yellow-300 rounded-xl lg:border-none bg-white/90 lg:bg-transparent"
         >
           <td
             v-html="highlightMatches(character.name)"
@@ -91,7 +91,16 @@
       </tbody>
     </table>
   </div>
-  <div v-else class="border-4 border-yellow-400 bg-white/80 w-1/3 rounded-lg m-auto text-center">It's a trap!</div>
+  <div
+    v-else
+    class="mx-2 text-xl border-4 border-yellow-400 bg-white/80 md:w-1/4 rounded-lg md:m-auto text-center py-1"
+  >
+    It's a trap!
+    <img
+      class="p-2"
+      src="https://cdn.computerhoy.com/sites/navi.axelspringer.es/public/styles/2400/public/media/image/2016/04/160751-its-trap-muere-actor-doblo-almirante-ackbar-star-wars.jpg?itok=B9LWUTaX"
+    />
+  </div>
 </template>
 <style src="./Table.css"></style>
 <script lang="ts">
@@ -120,7 +129,6 @@ export default {
           };
         });
         this.characters = results;
-        console.log(results);
       });
   },
   methods: {
